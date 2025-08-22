@@ -14,7 +14,7 @@ mun = st.selectbox("Selecciones un municipio:",
 
 filtro = data[data["entidad"]==mun]
 
-st.dataframe(filtro)
+
 
 gen = (filtro
        .groupby("clas_gen")["total_recaudo"]
@@ -31,21 +31,27 @@ total_det = det.sum()
 
 det = (det/total_det).round(3)
 
-st.dataframe(gen) # clasificación general
 
-st.dataframe(det) #clasificación detallada
+
+
 
 # Grafico de torta
 
 fig, ax = plt.subplots(1, 1, figsize=(10, 6))
 ax.pie(det.values, labels=det.index)
 
-st.pyplot(fig)
+fig = px.pie(names=gen.index, 
+             values=gen.values,
+             title="distribucion general de recursos",
+             color_discrete_sequence=["#639FAB","#BBCDE5","#1C5D99"])
 
+st.plotly_chart(fig)
 fig, ax = plt.subplots(1, 1, figsize=(10, 6))
 ax.pie(gen.values, labels=gen.index)
 
-st.pyplot(fig)
+colores_personalizados = ["#639FAB","#BBCDE5","#1C5D99" ]
+
+
 
 # treemap
 
@@ -55,7 +61,7 @@ fin = (filtro
                   ["total_recaudo"]
                   .sum()
                   .reset_index())
-st.dataframe(fin)
+
 
 fig = px.treemap(fin, path=[px.Constant("total"),
                             "clas_gen",
