@@ -66,7 +66,8 @@ fin = (filtro
 fig = px.treemap(fin, path=[px.Constant("total"),
                             "clas_gen",
                             "clasificacion_ofpuj"],
-                            values="total_recaudo")
+                            values="total_recaudo",
+                            color_discrete_sequence=["#639FAB","#BBCDE5","#1C5D99"])
 
 st.plotly_chart(fig)
 
