@@ -80,4 +80,6 @@ fig, ax = plt.subplots(1, 1)
 
 filtro2.plot(ax=ax)
 
+ax.set_axis_off()
+
 st.pyplot(fig)
